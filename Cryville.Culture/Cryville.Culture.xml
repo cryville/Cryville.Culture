@@ -1,0 +1,231 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Cryville.Culture</name>
+    </assembly>
+    <members>
+        <member name="T:Cryville.Culture.IdValidity">
+            <summary>
+            Provides a set of methods to check the validity of an ID, based on the ID validity data.
+            </summary>
+            <remarks>
+            <para>This class parses XML documents in the <see href="https://github.com/unicode-org/cldr/tree/main/common/validity"><c>common/validity</c></see> directory in CLDR.</para>
+            </remarks>
+        </member>
+        <member name="M:Cryville.Culture.IdValidity.Load(System.Xml.Linq.XDocument)">
+            <summary>
+            Loads the validity data from an XML document.
+            </summary>
+            <param name="xml">The XML document to be loaded.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="xml" /> is <see langword="null" />.</exception>
+            <exception cref="T:System.InvalidOperationException">An ID list in the document has already been loaded.</exception>
+            <remarks>
+            <para>This method parses XML documents in the <see href="https://github.com/unicode-org/cldr/tree/main/common/validity"><c>common/validity</c></see> directory in CLDR.</para>
+            </remarks>
+        </member>
+        <member name="M:Cryville.Culture.IdValidity.Check(System.String,System.String)">
+            <summary>
+            Gets the ID status of an ID.
+            </summary>
+            <param name="id">The ID to be checked.</param>
+            <param name="type">The type of the ID.</param>
+            <returns>The ID status of the ID, or <see langword="null" /> if the ID is not found.</returns>
+            <exception cref="T:System.InvalidOperationException">The ID list of the given type is not found or not loaded.</exception>
+        </member>
+        <member name="M:Cryville.Culture.IdValidity.Check(System.String,System.String,System.String)">
+            <summary>
+            Determines whether an ID is in the given status.
+            </summary>
+            <param name="id">The ID to be checked.</param>
+            <param name="type">The type of the ID.</param>
+            <param name="status">The status to be checked.</param>
+            <returns>Whether the given ID is in the given status.</returns>
+            <exception cref="T:System.InvalidOperationException">The ID list of the given type and the given status is not found or not loaded.</exception>
+        </member>
+        <member name="M:Cryville.Culture.IdValidity.Enumerate(System.String)">
+            <summary>
+            Gets a list of all IDs of a given type.
+            </summary>
+            <param name="type">The type of the IDs.</param>
+            <returns>The list of all IDs of the given type.</returns>
+            <exception cref="T:System.InvalidOperationException">The ID list of the given type is not found or not loaded.</exception>
+        </member>
+        <member name="M:Cryville.Culture.IdValidity.Enumerate(System.String,System.String)">
+            <summary>
+            Gets a list of all IDs of a given type and given status.
+            </summary>
+            <param name="type">The type of the IDs.</param>
+            <param name="status">The status of the IDs.</param>
+            <returns>The list of all IDs of the given type and given status.</returns>
+            <exception cref="T:System.InvalidOperationException">The ID list of the given type and the given status is not found or not loaded.</exception>
+        </member>
+        <member name="T:Cryville.Culture.LanguageId">
+            <summary>
+            Represents a <see href="https://unicode.org/reports/tr35/#Unicode_language_identifier">Unicode language identifier</see>.
+            </summary>
+        </member>
+        <member name="P:Cryville.Culture.LanguageId.Language">
+            <summary>
+            The language subtag.
+            </summary>
+        </member>
+        <member name="P:Cryville.Culture.LanguageId.Script">
+            <summary>
+            The script subtag.
+            </summary>
+        </member>
+        <member name="P:Cryville.Culture.LanguageId.Region">
+            <summary>
+            The region subtag.
+            </summary>
+        </member>
+        <member name="P:Cryville.Culture.LanguageId.Variant">
+            <summary>
+            The variant subtags.
+            </summary>
+        </member>
+        <member name="M:Cryville.Culture.LanguageId.#ctor(System.String)">
+            <summary>
+            Creates an instance of the <see cref="T:Cryville.Culture.LanguageId" /> struct.
+            </summary>
+            <param name="str">The string representation of the identifier.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="str" /> is <see langword="null" />.</exception>
+            <exception cref="T:System.FormatException">The input string is in an incorrect format.</exception>
+        </member>
+        <member name="P:Cryville.Culture.LanguageId.IsGrandfathered">
+            <summary>
+            Whether the current Unicode language identifier represents a <see href="https://www.rfc-editor.org/rfc/rfc5646.html#section-2.1">grandfathered tag</see>.
+            </summary>
+        </member>
+        <member name="P:Cryville.Culture.LanguageId.IsValid">
+            <summary>
+            Whether the current Unicode language identifier is valid.
+            </summary>
+            <remarks>
+            <para>This property calls <see cref="M:Cryville.Culture.IdValidity.Check(System.String,System.String)" /> to determine whether all the subtags are valid. Call <see cref="M:Cryville.Culture.IdValidity.Load(System.Xml.Linq.XDocument)" /> to load the validity data before getting this property.</para>
+            </remarks>
+        </member>
+        <member name="P:Cryville.Culture.LanguageId.SyntaxCanonicalized">
+            <summary>
+            Gets a syntax-canonicalized version of the current Unicode language identifier.
+            </summary>
+        </member>
+        <member name="M:Cryville.Culture.LanguageId.Clone(System.Boolean)">
+            <summary>
+            Gets a clone of the current Unicode language identifier.
+            </summary>
+            <param name="excludeVariant">Whether to exclude variant subtags.</param>
+            <returns>A clone of the current Unicode language identifier.</returns>
+        </member>
+        <member name="M:Cryville.Culture.LanguageId.Equals(Cryville.Culture.LanguageId)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cryville.Culture.LanguageId.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cryville.Culture.LanguageId.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="M:Cryville.Culture.LanguageId.op_Equality(Cryville.Culture.LanguageId,Cryville.Culture.LanguageId)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cryville.Culture.LanguageId.op_Inequality(Cryville.Culture.LanguageId,Cryville.Culture.LanguageId)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cryville.Culture.LanguageId.ToString">
+            <inheritdoc />
+        </member>
+        <member name="T:Cryville.Culture.LanguageMatching">
+            <summary>
+            Provides methods to match a language supported by the application against desired languages, based on the language matching data.
+            </summary>
+            <remarks>
+            <para>This class parses <see href="https://github.com/unicode-org/cldr/tree/main/common/supplemental/languageInfo.xml"><c>common/supplemental/languageInfo.xml</c></see> in CLDR.</para>
+            </remarks>
+        </member>
+        <member name="M:Cryville.Culture.LanguageMatching.#ctor(System.Xml.Linq.XDocument,Cryville.Culture.LikelySubtags)">
+            <summary>
+            Creates an instance of the <see cref="T:Cryville.Culture.LanguageMatching" /> class.
+            </summary>
+            <param name="xml">The <c>languageInfo</c> XML document to be loaded.</param>
+            <param name="subtags">The likely subtag data.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="xml" /> or <paramref name="subtags" /> is <see langword="null" />.</exception>
+            <exception cref="T:System.FormatException">The given <c>languageInfo</c> XML document is invalid.</exception>
+        </member>
+        <member name="M:Cryville.Culture.LanguageMatching.GetDistance(Cryville.Culture.LanguageId,Cryville.Culture.LanguageId)">
+            <summary>
+            Computes the distance between two languages.
+            </summary>
+            <param name="start">The starting language.</param>
+            <param name="end">The destination language.</param>
+            <returns>The distance from the <paramref name="start" /> language to the <paramref name="end" /> language.</returns>
+            <exception cref="T:System.InvalidOperationException">The distance cannot be computed.</exception>
+        </member>
+        <member name="M:Cryville.Culture.LanguageMatching.Match(Cryville.Culture.LanguageId,System.Collections.Generic.IEnumerable{Cryville.Culture.LanguageId},Cryville.Culture.LanguageId@,System.Int32@)">
+            <summary>
+            Matches a language among a list of supported languages against a desired language.
+            </summary>
+            <param name="desired">The desired language.</param>
+            <param name="supported">The list of supported languages.</param>
+            <param name="match">The matched language, or the default value of <see cref="T:Cryville.Culture.LanguageId" /> if there is no match.</param>
+            <param name="distance">The distance from <paramref name="desired" /> to <paramref name="match" />, or <see cref="F:System.Int32.MaxValue" /> if there is no match.</param>
+            <returns>Whether there is a match.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="supported" /> is <see langword="null" />.</exception>
+        </member>
+        <member name="T:Cryville.Culture.LikelySubtags">
+            <summary>
+            Provides methods to maximize and minimize a Unicode language identifier, based on the likely subtag data.
+            </summary>
+            <remarks>
+            <para>This class parses <see href="https://github.com/unicode-org/cldr/tree/main/common/supplemental/likelySubtags.xml"><c>common/supplemental/likelySubtags.xml</c></see> in CLDR.</para>
+            </remarks>
+        </member>
+        <member name="M:Cryville.Culture.LikelySubtags.#ctor(System.Xml.Linq.XDocument,Cryville.Culture.SupplementalMetadata)">
+            <summary>
+            Creates an instance of the <see cref="T:Cryville.Culture.LikelySubtags" /> class.
+            </summary>
+            <param name="xml">The <c>likelySubtags</c> XML document to be loaded.</param>
+            <param name="metadata">The alias data.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="xml" /> or <paramref name="metadata" /> is <see langword="null" />.</exception>
+        </member>
+        <member name="M:Cryville.Culture.LikelySubtags.AddLikelySubtags(Cryville.Culture.LanguageId)">
+            <summary>
+            Maximizes a Unicode language identifier.
+            </summary>
+            <param name="source">The Unicode language identifier to be maximized.</param>
+            <returns>The maximized Unicode language identifier.</returns>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">No matching likely subtag is found.</exception>
+        </member>
+        <member name="M:Cryville.Culture.LikelySubtags.RemoveLikelySubtags(Cryville.Culture.LanguageId,System.Boolean)">
+            <summary>
+            Minimizes a Unicode language identifier.
+            </summary>
+            <param name="source">The Unicode language identifier to be minimized.</param>
+            <param name="favoringScript">Whether to favor preserving the script subtag instead of the region subtag.</param>
+            <returns>The minimized Unicode language identifier.</returns>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">No matching likely subtag is found.</exception>
+        </member>
+        <member name="T:Cryville.Culture.SupplementalMetadata">
+            <summary>
+            Provides methods to convert an alias ID to its canonical form, based on the alias data.
+            </summary>
+            <remarks>
+            <para>This class parses <see href="https://github.com/unicode-org/cldr/tree/main/common/supplemental/supplementalMetadata.xml"><c>common/supplemental/supplementalMetadata.xml</c></see> in CLDR.</para>
+            </remarks>
+        </member>
+        <member name="M:Cryville.Culture.SupplementalMetadata.#ctor(System.Xml.Linq.XDocument)">
+            <summary>
+            Creates an instance of the <see cref="T:Cryville.Culture.SupplementalMetadata" /> class.
+            </summary>
+            <param name="xml">The <c>supplementalMetadata</c> XML document to be loaded.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="xml" /> is <see langword="null" />.</exception>
+        </member>
+        <member name="M:Cryville.Culture.SupplementalMetadata.Canonicalize(Cryville.Culture.LanguageId)">
+            <summary>
+            Converts all aliased subtags in a Unicode language identifier to their canonical forms.
+            </summary>
+            <param name="source">The Unicode language identifier to be converted.</param>
+            <returns>The canonicalized Unicode language identifier.</returns>
+        </member>
+    </members>
+</doc>

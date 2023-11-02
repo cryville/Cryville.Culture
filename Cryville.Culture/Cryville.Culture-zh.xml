@@ -1,0 +1,271 @@
+<?xml version="1.0"?>
+<doc>
+	<assembly>
+		<name>Cryville.Culture</name>
+	</assembly>
+	<members>
+		<member name="T:Cryville.Culture.IdValidity">
+			<summary>
+				提供一系列基于 ID 有效性数据检查 ID 有效性的方法。
+			</summary>
+			<remarks>
+				<para>
+					该类解析 CLDR 中 <see href="https://github.com/unicode-org/cldr/tree/main/common/validity"><c>common/validity</c></see> 目录中的 XML 文档。
+				</para>
+			</remarks>
+		</member>
+		<member name="M:Cryville.Culture.IdValidity.Load(System.Xml.Linq.XDocument)">
+			<summary>
+				从一个 XML 文档中加载有效性数据。
+			</summary>
+			<param name="xml">要加载的 XML 文档。</param>
+			<exception cref="T:System.ArgumentNullException">
+				<paramref name="xml" /> 为 <see langword="null" />。
+			</exception>
+			<exception cref="T:System.InvalidOperationException">文档中的一个 ID 列表已被加载。</exception>
+			<remarks>
+				<para>
+					该方法解析 CLDR 中 <see href="https://github.com/unicode-org/cldr/tree/main/common/validity"><c>common/validity</c></see> 目录中的 XML 文档。
+				</para>
+			</remarks>
+		</member>
+		<member name="M:Cryville.Culture.IdValidity.Check(System.String,System.String)">
+			<summary>
+				获取一个 ID 的 ID 状态。
+			</summary>
+			<param name="id">要检查的 ID。</param>
+			<param name="type">ID 的类型。</param>
+			<returns>
+				ID 的 ID 状态。如果没找到 ID 则返回 <see langword="null" />。
+			</returns>
+			<exception cref="T:System.InvalidOperationException">没有找到或没有加载给定类型的 ID 列表。</exception>
+		</member>
+		<member name="M:Cryville.Culture.IdValidity.Check(System.String,System.String,System.String)">
+			<summary>
+				确定一个 ID 是否处于给定的状态。
+			</summary>
+			<param name="id">要检查的 ID。</param>
+			<param name="type">ID 的类型。</param>
+			<param name="status">要检查的状态。</param>
+			<returns>给定的 ID 是否处于给定的状态。</returns>
+			<exception cref="T:System.InvalidOperationException">没有找到或没有加载给定类型和给定状态的 ID 列表。</exception>
+		</member>
+		<member name="M:Cryville.Culture.IdValidity.Enumerate(System.String)">
+			<summary>
+				获取给定类型的所有 ID 的列表。
+			</summary>
+			<param name="type">ID 的类型。</param>
+			<returns>给定类型的所有 ID 的列表。</returns>
+			<exception cref="T:System.InvalidOperationException">没有找到或没有加载给定类型的 ID 列表。</exception>
+		</member>
+		<member name="M:Cryville.Culture.IdValidity.Enumerate(System.String,System.String)">
+			<summary>
+				获取给定类型和给定状态的所有 ID 的列表。
+			</summary>
+			<param name="type">ID 的类型。</param>
+			<param name="status">ID 的状态。</param>
+			<returns>给定类型和给定状态的所有 ID 的列表。</returns>
+			<exception cref="T:System.InvalidOperationException">没有找到或没有加载给定类型和给定状态的 ID 列表。</exception>
+		</member>
+		<member name="T:Cryville.Culture.LanguageId">
+			<summary>
+				表示一个 <see href="https://unicode.org/reports/tr35/#Unicode_language_identifier">Unicode 语言标识符</see>。
+			</summary>
+		</member>
+		<member name="P:Cryville.Culture.LanguageId.Language">
+			<summary>
+				语言子标签。
+			</summary>
+		</member>
+		<member name="P:Cryville.Culture.LanguageId.Script">
+			<summary>
+				文字子标签。
+			</summary>
+		</member>
+		<member name="P:Cryville.Culture.LanguageId.Region">
+			<summary>
+				区域子标签。
+			</summary>
+		</member>
+		<member name="P:Cryville.Culture.LanguageId.Variant">
+			<summary>
+				变体子标签。
+			</summary>
+		</member>
+		<member name="M:Cryville.Culture.LanguageId.#ctor(System.String)">
+			<summary>
+				创建一个 <see cref="T:Cryville.Culture.LanguageId" /> 结构体的实例。
+			</summary>
+			<param name="str">标识符的字符串表示。</param>
+			<exception cref="T:System.ArgumentNullException">
+				<paramref name="str" /> 为 <see langword="null" />。
+			</exception>
+			<exception cref="T:System.FormatException">输入的字符串格式不正确。</exception>
+		</member>
+		<member name="P:Cryville.Culture.LanguageId.IsGrandfathered">
+			<summary>
+				当前 Unicode 语言标识符是否表示一个<see href="https://www.rfc-editor.org/rfc/rfc5646.html#section-2.1">保留标签</see>（grandfathered tag）。
+			</summary>
+		</member>
+		<member name="P:Cryville.Culture.LanguageId.IsValid">
+			<summary>
+				当前 Unicode 语言标识符是否有效。
+			</summary>
+			<remarks>
+				<para>
+					该属性通过调用 <see cref="M:Cryville.Culture.IdValidity.Check(System.String,System.String)" /> 来确定其所有子标签是否有效。获取该属性前，先调用 <see cref="M:Cryville.Culture.IdValidity.Load(System.Xml.Linq.XDocument)" /> 加载有效性数据。
+				</para>
+			</remarks>
+		</member>
+		<member name="P:Cryville.Culture.LanguageId.SyntaxCanonicalized">
+			<summary>
+				获取当前 Unicode 语言标识符的一个标准语法版本。
+			</summary>
+		</member>
+		<member name="M:Cryville.Culture.LanguageId.Clone(System.Boolean)">
+			<summary>
+				获取当前 Unicode 语言标识符的一个副本。
+			</summary>
+			<param name="excludeVariant">是否排除变体子标签。</param>
+			<returns>当前 Unicode 语言标识符的一个副本。</returns>
+		</member>
+		<member name="M:Cryville.Culture.LanguageId.Equals(Cryville.Culture.LanguageId)">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Culture.LanguageId.Equals(System.Object)">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Culture.LanguageId.GetHashCode">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Culture.LanguageId.op_Equality(Cryville.Culture.LanguageId,Cryville.Culture.LanguageId)">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Culture.LanguageId.op_Inequality(Cryville.Culture.LanguageId,Cryville.Culture.LanguageId)">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Culture.LanguageId.ToString">
+			<inheritdoc />
+		</member>
+		<member name="T:Cryville.Culture.LanguageMatching">
+			<summary>
+				提供基于语言匹配数据为请求的语言匹配一个应用支持的语言的方法。
+			</summary>
+			<remarks>
+				<para>
+					该类解析 CLDR 中的 <see href="https://github.com/unicode-org/cldr/tree/main/common/supplemental/languageInfo.xml"><c>common/supplemental/languageInfo.xml</c></see>。
+				</para>
+			</remarks>
+		</member>
+		<member name="M:Cryville.Culture.LanguageMatching.#ctor(System.Xml.Linq.XDocument,Cryville.Culture.LikelySubtags)">
+			<summary>
+				创建一个 <see cref="T:Cryville.Culture.LanguageMatching" /> 类的实例。
+			</summary>
+			<param name="xml">
+				要加载的 <c>languageInfo</c> XML 文档。
+			</param>
+			<param name="subtags">子标签倾向数据。</param>
+			<exception cref="T:System.ArgumentNullException">
+				<paramref name="xml" /> 或 <paramref name="subtags" /> 为 <see langword="null" />。
+			</exception>
+			<exception cref="T:System.FormatException">
+				给定的 <c>languageInfo</c> XML 文档无效。
+			</exception>
+		</member>
+		<member name="M:Cryville.Culture.LanguageMatching.GetDistance(Cryville.Culture.LanguageId,Cryville.Culture.LanguageId)">
+			<summary>
+				计算两个语言之间的距离。
+			</summary>
+			<param name="start">起点语言。</param>
+			<param name="end">终点语言。</param>
+			<returns>
+				从 <paramref name="start" /> 语言到 <paramref name="end" /> 语言的距离。
+			</returns>
+			<exception cref="T:System.InvalidOperationException">无法计算距离。</exception>
+		</member>
+		<member name="M:Cryville.Culture.LanguageMatching.Match(Cryville.Culture.LanguageId,System.Collections.Generic.IEnumerable{Cryville.Culture.LanguageId},Cryville.Culture.LanguageId@,System.Int32@)">
+			<summary>
+				从支持的语言列表中为请求的语言匹配一个语言。
+			</summary>
+			<param name="desired">请求的语言。</param>
+			<param name="supported">支持的语言列表。</param>
+			<param name="match">
+				匹配的语言。如果没有匹配则为 <see cref="T:Cryville.Culture.LanguageId" /> 的默认值。
+			</param>
+			<param name="distance">
+				从 <paramref name="desired" /> 到 <paramref name="match" /> 的距离。如果没有匹配则为 <see cref="F:System.Int32.MaxValue" />。
+			</param>
+			<returns>匹配是否成功。</returns>
+			<exception cref="T:System.ArgumentNullException">
+				<paramref name="supported" /> 为 <see langword="null" />。
+			</exception>
+		</member>
+		<member name="T:Cryville.Culture.LikelySubtags">
+			<summary>
+				提供基于子标签倾向数据最大化和最小化 Unicode 语言标识符的方法。
+			</summary>
+			<remarks>
+				<para>
+					该类解析 CLDR 中的 <see href="https://github.com/unicode-org/cldr/tree/main/common/supplemental/likelySubtags.xml"><c>common/supplemental/likelySubtags.xml</c></see>。
+				</para>
+			</remarks>
+		</member>
+		<member name="M:Cryville.Culture.LikelySubtags.#ctor(System.Xml.Linq.XDocument,Cryville.Culture.SupplementalMetadata)">
+			<summary>
+				创建一个 <see cref="T:Cryville.Culture.LikelySubtags" /> 类的实例。
+			</summary>
+			<param name="xml">
+				要加载的 <c>likelySubtags</c> XML 文档。
+			</param>
+			<param name="metadata">别名数据。</param>
+			<exception cref="T:System.ArgumentNullException">
+				<paramref name="xml" /> 或 <paramref name="metadata" /> 为 <see langword="null" />。
+			</exception>
+		</member>
+		<member name="M:Cryville.Culture.LikelySubtags.AddLikelySubtags(Cryville.Culture.LanguageId)">
+			<summary>
+				最大化一个 Unicode 语言标识符。
+			</summary>
+			<param name="source">要最大化的 Unicode 语言标识符。</param>
+			<returns>最大化的 Unicode 语言标识符。</returns>
+			<exception cref="T:System.Collections.Generic.KeyNotFoundException">没有找到匹配的子标签倾向。</exception>
+		</member>
+		<member name="M:Cryville.Culture.LikelySubtags.RemoveLikelySubtags(Cryville.Culture.LanguageId,System.Boolean)">
+			<summary>
+				最小化一个 Unicode 语言标识符。
+			</summary>
+			<param name="source">要最小化的 Unicode 语言标识符。</param>
+			<param name="favoringScript">是否倾向保留文字子标签而不是区域子标签。</param>
+			<returns>最小化的 Unicode 语言标识符。</returns>
+			<exception cref="T:System.Collections.Generic.KeyNotFoundException">没有找到匹配的子标签倾向。</exception>
+		</member>
+		<member name="T:Cryville.Culture.SupplementalMetadata">
+			<summary>
+				提供基于别名数据将一个别名 ID 转换为其标准形式的方法。
+			</summary>
+			<remarks>
+				<para>
+					该类解析 CLDR 中的 <see href="https://github.com/unicode-org/cldr/tree/main/common/supplemental/supplementalMetadata.xml"><c>common/supplemental/supplementalMetadata.xml</c></see>。
+				</para>
+			</remarks>
+		</member>
+		<member name="M:Cryville.Culture.SupplementalMetadata.#ctor(System.Xml.Linq.XDocument)">
+			<summary>
+				创建一个 <see cref="T:Cryville.Culture.SupplementalMetadata" /> 类的实例。
+			</summary>
+			<param name="xml">
+				要加载的 <c>supplementalMetadata</c> XML 文档。
+			</param>
+			<exception cref="T:System.ArgumentNullException">
+				<paramref name="xml" /> 为 <see langword="null" />。
+			</exception>
+		</member>
+		<member name="M:Cryville.Culture.SupplementalMetadata.Canonicalize(Cryville.Culture.LanguageId)">
+			<summary>
+				将一个 Unicode 语言标识符内的所有别名子标签转换为其标准形式。
+			</summary>
+			<param name="source">要转换的 Unicode 语言标识符。</param>
+			<returns>标准化的 Unicode 语言标识符。</returns>
+		</member>
+	</members>
+</doc>
